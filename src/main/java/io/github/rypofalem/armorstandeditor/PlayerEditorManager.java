@@ -466,9 +466,11 @@ public class PlayerEditorManager implements Listener {
             ItemStack item = e.getCurrentItem();
             if (item != null && item.hasItemMeta()) {
                 Player player = (Player) e.getWhoClicked();
-                String itemName = item.getItemMeta().getDisplayName();
+                String identifier = item.getItemMeta().getPersistentDataContainer()
+                    .get(plugin.getIconKey(), PersistentDataType.STRING);
+                if (identifier == null) return;
                 PlayerEditor pe = players.get(player.getUniqueId());
-                pe.presetPoseMenu.handlePresetPose(itemName, player);
+                pe.presetPoseMenu.handlePresetPose(identifier, player);
             }
         }
 
