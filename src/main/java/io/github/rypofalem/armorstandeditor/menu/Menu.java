@@ -257,7 +257,11 @@ public class Menu {
             glowing = blankSlot;
         }
 
-        help = createIcon(new ItemStack(Material.NETHER_STAR), "helpgui", "help");
+        if (pe.plugin.getShowHelpButton()) {
+            help = createIcon(new ItemStack(Material.NETHER_STAR), "helpgui", "help");
+        } else {
+            help = blankSlot;
+        }
 
         ItemStack[] items = {
 

@@ -91,6 +91,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     //GUI Settings
     boolean requireSneaking = false;
     boolean sendToActionBar = true;
+    boolean showHelpButton = true;
 
     //Armor Stand Specific Settings
     double coarseRot;
@@ -289,6 +290,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
 
         //Send Messages to Action Bar
         sendToActionBar = getConfig().getBoolean("sendMessagesToActionBar", true);
+        showHelpButton = getConfig().getBoolean("showHelpButton", true);
 
         //All ItemFrame Stuff
         glowItemFrames = getConfig().getBoolean("glowingItemFrame", true);
@@ -492,6 +494,10 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         return this.getConfig().getBoolean("allowCustomModelData");
     }
 
+    public boolean getShowHelpButton() {
+        return showHelpButton;
+    }
+
     public Material getEditTool() {
         return this.editTool;
     }
@@ -680,6 +686,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
 
         //Send Messages to Action Bar
         sendToActionBar = getConfig().getBoolean("sendMessagesToActionBar", true);
+        showHelpButton = getConfig().getBoolean("showHelpButton", true);
 
         //All ItemFrame Stuff
         glowItemFrames = getConfig().getBoolean("glowingItemFrame", true);
