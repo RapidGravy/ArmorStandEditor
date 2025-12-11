@@ -36,7 +36,7 @@ setmode:
   rotate: Rotate
   copy: Copy
   paste: Paste
-  reset: Reset Pose
+  reset: Reset Size
   itemframe: Toggle Itemframe Visibility
   playerhead: Get a Players Head
 setaxis:
@@ -269,7 +269,7 @@ copyslot:
   description:
     msg: Select a slot to store settings
 reset:
-  msg: Reset Pose
+  msg: Reset Size
   description:
     msg: Reset bodypart position to default
 helpgui:
