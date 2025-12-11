@@ -74,10 +74,6 @@ public class Menu {
         ItemStack plate = null;
         ItemStack copy = null;
         ItemStack paste = null;
-        ItemStack slot1 = null;
-        ItemStack slot2 = null;
-        ItemStack slot3 = null;
-        ItemStack slot4 = null;
         ItemStack help;
         ItemStack itemFrameVisible;
         ItemStack blankSlot;
@@ -229,18 +225,6 @@ public class Menu {
         if (pe.getPlayer().hasPermission("asedit.copy")) {
             copy = createIcon(new ItemStack(Material.FLOWER_BANNER_PATTERN),
                 "copy", "mode copy");
-
-            slot1 = createIcon(new ItemStack(Material.BOOK),
-                "copyslot", "slot 1", "1");
-
-            slot2 = createIcon(new ItemStack(Material.BOOK, 2),
-                "copyslot", "slot 2", "2");
-
-            slot3 = createIcon(new ItemStack(Material.BOOK, 3),
-                "copyslot", "slot 3", "3");
-
-            slot4 = createIcon(new ItemStack(Material.BOOK, 4),
-                "copyslot", "slot 4", "4");
         }
 
         if (pe.getPlayer().hasPermission("asedit.paste")) {
@@ -275,8 +259,8 @@ public class Menu {
 
             blankSlot, blankSlot, blankSlot, xAxis, yAxis, zAxis, blankSlot, blankSlot, help,
             copy, paste, blankSlot, playerHead, headPos, reset, blankSlot, itemFrameVisible, glowing,
-            slot1, slot2, blankSlot, rightArmPos, bodyPos, leftArmPos, blankSlot, rotate, place,
-            slot3, slot4, blankSlot, rightLegPos, equipment, leftLegPos, blankSlot, coarseAdj, fineAdj,
+            blankSlot, blankSlot, blankSlot, rightArmPos, bodyPos, leftArmPos, blankSlot, rotate, place,
+            blankSlot, blankSlot, blankSlot, rightLegPos, equipment, leftLegPos, blankSlot, coarseAdj, fineAdj,
             presetItem, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, disableSlots,
             blankSlot, showArms, visibility, size, blankSlot, plate, toggleVulnerabilty, gravity, blankSlot
         };

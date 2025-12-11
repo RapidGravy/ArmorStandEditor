@@ -118,9 +118,13 @@ public class PlayerEditor {
     }
 
     public void setCopySlot(byte slot) {
-        copySlots.changeSlots(slot);
-        debug.log("Copy Slot set to: "+ (slot + 1));
-        sendMessage("setslot", String.valueOf((slot + 1)));
+        if (!copySlots.changeSlots(slot)) {
+            debug.log("Requested copy slot " + (slot + 1) + " is invalid. Defaulting to slot 1.");
+            sendMessage("setslot", "1");
+            return;
+        }
+        debug.log("Copy Slot set to: "+ (copySlots.currentSlot + 1));
+        sendMessage("setslot", String.valueOf((copySlots.currentSlot + 1)));
     }
 
     public void editArmorStand(ArmorStand armorStand) {

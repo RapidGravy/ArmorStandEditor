@@ -47,7 +47,7 @@ public class CommandEx implements CommandExecutor, TabCompleter {
     final String LISTMODE = ChatColor.YELLOW + "/ase mode <" + Util.getEnumList(EditMode.class) + ">";
     final String LISTAXIS = ChatColor.YELLOW + "/ase axis <" + Util.getEnumList(Axis.class) + ">";
     final String LISTADJUSTMENT = ChatColor.YELLOW + "/ase adj <" + Util.getEnumList(AdjustmentMode.class) + ">";
-    final String LISTSLOT = ChatColor.YELLOW + "/ase slot <1-9>";
+    final String LISTSLOT = ChatColor.YELLOW + "/ase slot <1>";
     final String HELP = ChatColor.YELLOW + "/ase help or /ase ?";
     final String VERSION = ChatColor.YELLOW + "/ase version";
     final String RELOAD = ChatColor.YELLOW + "/ase reload";
@@ -177,10 +177,11 @@ public class CommandEx implements CommandExecutor, TabCompleter {
         if (args.length > 1) {
             try {
                 byte slot = (byte) (Byte.parseByte(args[1]) - 0b1);
-                if (slot >= 0 && slot < 9) {
+                if (slot == 0) {
                     debug.log("Player has chosen slot: " + slot);
                     plugin.editorManager.getPlayerEditor(player.getUniqueId()).setCopySlot(slot);
                 } else {
+                    player.sendMessage(ChatColor.RED + "Only slot 1 is available.");
                     player.sendMessage(LISTSLOT);
                 }
 

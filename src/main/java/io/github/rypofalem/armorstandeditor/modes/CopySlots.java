@@ -22,17 +22,17 @@ package io.github.rypofalem.armorstandeditor.modes;
 import org.bukkit.entity.ArmorStand;
 
 public class CopySlots {
-    ArmorStandData[] slots = new ArmorStandData[9];
+    private static final int SLOT_COUNT = 1;
+    ArmorStandData[] slots = new ArmorStandData[SLOT_COUNT];
     public byte currentSlot = 0;
 
     //returns true if parameters are acceptable, false otherwise.
     public boolean changeSlots(byte slot) {
-        if (slot < slots.length && slot >= 0) {
-            currentSlot = slot;
+        if (slot == 0) {
+            currentSlot = 0;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public void copyDataToSlot(ArmorStand armorStand) {
