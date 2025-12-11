@@ -432,7 +432,7 @@ public class PlayerEditor {
         }
     }
 
-    private void resetPosition(ArmorStand armorStand) {
+    public void resetPosition(ArmorStand armorStand) {
         if (getPlayer().hasPermission("asedit.reset")) {
             debug.log("Resetting ArmorStand near the Player " + getPlayer().getDisplayName());
             armorStand.setHeadPose(new EulerAngle(0, 0, 0));

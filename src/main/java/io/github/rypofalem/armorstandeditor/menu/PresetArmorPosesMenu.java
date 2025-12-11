@@ -68,7 +68,7 @@ public class PresetArmorPosesMenu {
 
     //Menu Stuff
     final String BACKTOMENU = plugin.getLang().getMessage("backtomenu").replace(VALUETOREPLACE, "§2§n");
-    final String HOWTO = plugin.getLang().getMessage("howtopreset").replace(VALUETOREPLACE, "§2§n");
+    final String RESETPOSE = plugin.getLang().getMessage("presetreset").replace(VALUETOREPLACE, "§2§n");
 
     private void fillInventory() {
         menuInv.clear();
@@ -95,13 +95,13 @@ public class PresetArmorPosesMenu {
 
         //Utilities
         ItemStack backToMenu = createIcon(new ItemStack(Material.RED_WOOL, 1), "backtomenu");
-        ItemStack howToPreset = createIcon(new ItemStack(Material.BOOK, 1), "howtopreset");
+        ItemStack resetPose = createIcon(new ItemStack(Material.NETHER_STAR, 1), "presetreset");
 
         //Build for the Menu ---- DO NOT MODIFY THIS UNLESS YOU KNOW WHAT YOU ARE DOING!
         ItemStack[] items = {
             blank, blank, blank, blank, blank, blank, blank, blank, blank,
             blank, backToMenu, sitting, waving, greet1, greet2, cheer, archer, blank,
-            blank, howToPreset, dancing, hanging, present, fishing, blank, blank, blank,
+            blank, resetPose, dancing, hanging, present, fishing, blank, blank, blank,
             blank, blank, blank, blank, blank, blank, blank, blank, blank
         };
 
@@ -190,10 +190,8 @@ public class PresetArmorPosesMenu {
             player.playSound(player.getLocation(), Sound.BLOCK_COMPARATOR_CLICK, 1, 1);
             player.closeInventory();
             pe.openMenu();
-        } else if (itemName.equals(HOWTO)) {
-            player.sendMessage(pe.plugin.getLang().getMessage("howtopresetmsg"));
-            player.sendMessage(pe.plugin.getLang().getMessage("helpurl"));
-            player.sendMessage(pe.plugin.getLang().getMessage("helpdiscord"));
+        } else if (itemName.equals(RESETPOSE)) {
+            pe.resetPosition(armorStand);
             player.playSound(player.getLocation(), Sound.BLOCK_COMPARATOR_CLICK, 1, 1);
             player.closeInventory();
         }
