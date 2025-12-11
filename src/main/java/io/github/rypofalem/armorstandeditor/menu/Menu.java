@@ -155,8 +155,9 @@ public class Menu {
             visibility = blankSlot;
         }
 
-        if (pe.getPlayer().hasPermission("asedit.toggleitemframevisibility") ||
-            pe.plugin.getItemFrameVisibility()) {
+        if (pe.plugin.getShowItemFrameVisibilityButton() &&
+            (pe.getPlayer().hasPermission("asedit.toggleitemframevisibility") ||
+                pe.plugin.getItemFrameVisibility())) {
             itemFrameVisible = new ItemStack(Material.ITEM_FRAME, 1);
             createIcon(itemFrameVisible, "itemframevisible", "mode itemframe");
         } else {

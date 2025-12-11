@@ -92,6 +92,8 @@ sendMessagesToActionBar: true
 
 #Show or hide the Help button inside the GUI (replaces with an empty slot when disabled)
 showHelpButton: true
+#Show or hide the Item Frame visibility toggle inside the GUI (permission still required if shown)
+showItemFrameVisibilityButton: true
 
 #------ Misc Options
 
