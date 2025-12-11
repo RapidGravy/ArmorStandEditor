@@ -90,7 +90,7 @@ public class Menu {
         blankSlot = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1);
         ItemMeta blankMeta = blankSlot.getItemMeta();
         if (blankMeta != null) {
-            blankMeta.setDisplayName("");
+            blankMeta.setDisplayName(" ");
             blankMeta.setLore(null);
             blankSlot.setItemMeta(blankMeta);
         }
