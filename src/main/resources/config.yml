@@ -86,6 +86,8 @@ showHelpButton: true
 showItemFrameVisibilityButton: true
 #Show or hide the Armor Stand glow toggle inside the GUI
 showArmorStandGlowButton: true
+#Show or hide the X/Y/Z axis selector buttons inside the GUI
+showAxisButtons: true
 
 #------ Misc Options
 

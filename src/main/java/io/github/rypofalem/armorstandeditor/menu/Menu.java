@@ -96,14 +96,20 @@ public class Menu {
             "blankslot", "");
 
         //Axis - X, Y, Z for Movement
-        xAxis = createIcon(new ItemStack(Material.RED_CONCRETE, 1),
-            "xaxis", "axis x");
+        if (pe.plugin.getShowAxisButtons()) {
+            xAxis = createIcon(new ItemStack(Material.RED_CONCRETE, 1),
+                "xaxis", "axis x");
 
-        yAxis = createIcon(new ItemStack(Material.GREEN_CONCRETE, 1),
-            "yaxis", "axis y");
+            yAxis = createIcon(new ItemStack(Material.GREEN_CONCRETE, 1),
+                "yaxis", "axis y");
 
-        zAxis = createIcon(new ItemStack(Material.BLUE_CONCRETE, 1),
-            "zaxis", "axis z");
+            zAxis = createIcon(new ItemStack(Material.BLUE_CONCRETE, 1),
+                "zaxis", "axis z");
+        } else {
+            xAxis = blankSlot;
+            yAxis = blankSlot;
+            zAxis = blankSlot;
+        }
 
         //Movement Speed
         coarseAdj = createIcon(new ItemStack(Material.COARSE_DIRT, 1),
