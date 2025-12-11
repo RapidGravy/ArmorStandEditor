@@ -36,6 +36,8 @@ import org.bukkit.scoreboard.Team;
 import java.io.File;
 import java.util.*;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ArmorStandEditorPlugin extends JavaPlugin {
 
@@ -236,8 +238,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         //Do we require a custom tool name?
         requireToolName = getConfig().getBoolean("requireToolName", false);
         if (requireToolName) {
-            editToolName = getConfig().getString("toolName", null);
-            if (editToolName != null) editToolName = ChatColor.translateAlternateColorCodes('&', editToolName);
+            editToolName = colorize(getConfig().getString("toolName", null));
         }
 
         //Custom Model Data
@@ -260,7 +261,14 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         requireToolLore = getConfig().getBoolean("requireToolLore", false);
 
         if (requireToolLore) {
-            editToolLore = getConfig().getList("toolLore", null);
+            List<String> rawLore = getConfig().getStringList("toolLore");
+            if (rawLore != null && !rawLore.isEmpty()) {
+                List<String> coloredLore = new ArrayList<>();
+                for (String line : rawLore) {
+                    coloredLore.add(colorize(line));
+                }
+                editToolLore = coloredLore;
+            }
         }
 
         enablePerWorld = getConfig().getBoolean("enablePerWorldSupport", false);
@@ -567,8 +575,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         //Do we require a custom tool name?
         requireToolName = getConfig().getBoolean("requireToolName", false);
         if (requireToolName) {
-            editToolName = getConfig().getString("toolName", null);
-            if (editToolName != null) editToolName = ChatColor.translateAlternateColorCodes('&', editToolName);
+            editToolName = colorize(getConfig().getString("toolName", null));
         }
 
         //Custom Model Data
@@ -591,7 +598,14 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         requireToolLore = getConfig().getBoolean("requireToolLore", false);
 
         if (requireToolLore) {
-            editToolLore = getConfig().getList("toolLore", null);
+            List<String> rawLore = getConfig().getStringList("toolLore");
+            if (rawLore != null && !rawLore.isEmpty()) {
+                List<String> coloredLore = new ArrayList<>();
+                for (String line : rawLore) {
+                    coloredLore.add(colorize(line));
+                }
+                editToolLore = coloredLore;
+            }
         }
 
 
@@ -624,6 +638,24 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
 
     public static ArmorStandEditorPlugin instance() {
         return instance;
+    }
+
+    private static final Pattern HEX_PATTERN = Pattern.compile("&#([A-Fa-f0-9]{6})");
+
+    private String colorize(String input) {
+        if (input == null) return null;
+        Matcher matcher = HEX_PATTERN.matcher(input);
+        StringBuffer buffer = new StringBuffer();
+        while (matcher.find()) {
+            String hex = matcher.group(1);
+            StringBuilder replacement = new StringBuilder("§x");
+            for (char c : hex.toCharArray()) {
+                replacement.append('§').append(c);
+            }
+            matcher.appendReplacement(buffer, replacement.toString());
+        }
+        matcher.appendTail(buffer);
+        return ChatColor.translateAlternateColorCodes('&', buffer.toString());
     }
 
     //Metrics/bStats Support
