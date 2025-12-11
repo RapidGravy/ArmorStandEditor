@@ -29,10 +29,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 
@@ -75,7 +72,6 @@ public class Menu {
         ItemStack copy = null;
         ItemStack paste = null;
         ItemStack help;
-        ItemStack itemFrameVisible;
         ItemStack blankSlot;
         ItemStack presetItem = null;
 
@@ -153,15 +149,6 @@ public class Menu {
             createIcon(visibility, "invisible", "mode invisible");
         } else {
             visibility = blankSlot;
-        }
-
-        if (pe.plugin.getShowItemFrameVisibilityButton() &&
-            (pe.getPlayer().hasPermission("asedit.toggleitemframevisibility") ||
-                pe.plugin.getItemFrameVisibility())) {
-            itemFrameVisible = new ItemStack(Material.ITEM_FRAME, 1);
-            createIcon(itemFrameVisible, "itemframevisible", "mode itemframe");
-        } else {
-            itemFrameVisible = blankSlot;
         }
 
         //Praise end
@@ -248,7 +235,7 @@ public class Menu {
         ItemStack[] items = {
 
             blankSlot, blankSlot, blankSlot, xAxis, yAxis, zAxis, blankSlot, blankSlot, help,
-            copy, paste, blankSlot, blankSlot, headPos, reset, blankSlot, itemFrameVisible, glowing,
+            copy, paste, blankSlot, blankSlot, headPos, reset, blankSlot, blankSlot, glowing,
             blankSlot, blankSlot, blankSlot, rightArmPos, bodyPos, leftArmPos, blankSlot, rotate, place,
             blankSlot, blankSlot, blankSlot, rightLegPos, equipment, leftLegPos, blankSlot, coarseAdj, fineAdj,
             presetItem, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, disableSlots,

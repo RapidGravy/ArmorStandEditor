@@ -68,9 +68,6 @@ permissions:
   asedit.togglearmorstandvisibility:
     description: Toggles ArmorStand visibility.
     default: true
-  asedit.toggleitemframevisibility:
-    description: Allows setting of ItemFrame Visibility
-    default: true
   asedit.toggleInvulnerability:
     description: Allows players to toggle the vulnerability state of an ArmorStand.
     default: true
@@ -174,7 +171,6 @@ permissions:
       asedit.togglearms: true
       asedit.togglesize: true
       asedit.togglearmorstandvisibility: true
-      asedit.toggleitemframevisibility: true
       asedit.togglearmorstandglow: true
       asedit.permpack.dontIgnoreProtections: true
 
@@ -201,4 +197,3 @@ permissions:
       asedit.toggleInvulnerability: true
       asedit.togglegravity: true
       asedit.togglearmorstandvisibility: true
-      asedit.toggleitemframevisibility: true

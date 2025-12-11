@@ -215,7 +215,6 @@ public class CommandEx implements CommandExecutor, TabCompleter {
             for (EditMode mode : EditMode.values()) {
                 if (mode.toString().toLowerCase().contentEquals(args[1].toLowerCase())) {
                     if (args[1].equals("invisible") && !(checkPermission(player, "togglearmorstandvisibility", true) || plugin.getArmorStandVisibility())) return;
-                    if (args[1].equals("itemframe") && !(checkPermission(player, "toggleitemframevisibility", true) || plugin.getItemFrameVisibility())) return;
                     plugin.editorManager.getPlayerEditor(player.getUniqueId()).setMode(mode);
                     debug.log("Player '" + player.getDisplayName() + "' chose the mode: " + mode);
                     return;
@@ -511,7 +510,7 @@ public class CommandEx implements CommandExecutor, TabCompleter {
             "Size", "Copy", "Paste", "Head", "Body", "LeftArm",
             "RightArm", "LeftLeg", "RightLeg", "Placement",
             "DisableSlots", "Rotate", "Equipment", "Reset",
-            "ItemFrame", "ItemFrameGlow", "Vulnerability", "ArmorStandGlow"
+            "Vulnerability", "ArmorStandGlow"
         );
     }
 

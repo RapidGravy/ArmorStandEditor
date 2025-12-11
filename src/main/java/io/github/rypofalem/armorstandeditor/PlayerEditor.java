@@ -38,7 +38,6 @@ import io.github.rypofalem.armorstandeditor.Debug;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.potion.PotionEffect;
@@ -67,11 +66,7 @@ public class PlayerEditor {
     ArmorStand target;
     ArrayList<ArmorStand> targetList = null;
 
-    //NEW: ItemFrame Stuff
-    ItemFrame frameTarget;
-    ArrayList<ItemFrame> frameTargetList = null;
     int targetIndex = 0;
-    int frameTargetIndex = 0;
     EquipmentMenu equipMenu;
     PresetArmorPosesMenu presetPoseMenu;
     SizeMenu sizeModificationMenu;
@@ -200,29 +195,6 @@ public class PlayerEditor {
                     sendMessage("nomode", null);
                     break;
 
-            }
-        } else return;
-    }
-
-    public void editItemFrame(ItemFrame itemFrame) {
-        if (getPlayer().hasPermission("asedit.toggleitemframevisibility") || plugin.invisibleItemFrames) {
-
-            //Generate a new ArmorStandManipulationEvent and call it out.
-            ItemFrameManipulatedEvent event = new ItemFrameManipulatedEvent(itemFrame, getPlayer());
-            Bukkit.getPluginManager().callEvent(event); // Bukkit handles the call out
-            if (event.isCancelled()) return; //do nothing if cancelled
-
-            switch (eMode) {
-                case ITEMFRAME:
-                    toggleItemFrameVisible(itemFrame);
-                    break;
-                case RESET:
-                    itemFrame.setVisible(true);
-                    break;
-                case NONE:
-                default:
-                    sendMessage("nomodeif", null);
-                    break;
             }
         } else return;
     }
@@ -547,15 +519,6 @@ public class PlayerEditor {
         }
     }
 
-    void toggleItemFrameVisible(ItemFrame itemFrame) {
-        if (getPlayer().hasPermission("asedit.toggleitemframevisibility") || plugin.invisibleItemFrames) { //Option to use perms or Config
-            debug.log("Toggling the Visibility of an ItemFrame near player: " + getPlayer().getDisplayName());
-            itemFrame.setVisible(!itemFrame.isVisible());
-        } else {
-            sendMessage("nopermoption", "warn", "itemframevisibility");
-        }
-    }
-
 
     void cycleAxis(int i) {
         int index = axis.ordinal();
@@ -641,41 +604,6 @@ public class PlayerEditor {
     }
 
 
-    public void setFrameTarget(ArrayList<ItemFrame> itemFrames) {
-        if (itemFrames == null || itemFrames.isEmpty()) {
-            frameTarget = null;
-            frameTargetList = null;
-            sendMessage("notarget", "itemframe");
-        } else {
-
-            if (frameTargetList == null) {
-                frameTargetList = itemFrames;
-                frameTargetIndex = 0;
-                sendMessage("frametarget", null);
-            } else {
-                boolean same = frameTargetList.size() == itemFrames.size();
-                if (same) for (final ItemFrame itemf : itemFrames) {
-                    same = frameTargetList.contains(itemf);
-                    if (!same) break;
-                }
-
-                if (same) {
-                    frameTargetIndex = ++frameTargetIndex % frameTargetList.size();
-                } else {
-                    frameTargetList = itemFrames;
-                    frameTargetIndex = 0;
-                    sendMessage("frametarget", null);
-                }
-
-                //API: ItemFrameTargetedEvent
-                ItemFrameTargetedEvent e = new ItemFrameTargetedEvent(frameTargetList.get(frameTargetIndex), getPlayer());
-                Bukkit.getPluginManager().callEvent(e); //TODO: Folia Refactor
-                if (e.isCancelled()) return;
-
-                frameTarget = frameTargetList.get(frameTargetIndex);
-            }
-        }
-    }
 
 
     ArmorStand attemptTarget(ArmorStand armorStand) {

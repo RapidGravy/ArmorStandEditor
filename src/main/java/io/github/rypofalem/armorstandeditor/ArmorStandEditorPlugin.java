@@ -83,7 +83,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     boolean requireSneaking = false;
     boolean sendToActionBar = true;
     boolean showHelpButton = true;
-    boolean showItemFrameVisibilityButton = true;
     boolean showArmorStandGlowButton = true;
     boolean showAxisButtons = true;
     boolean showGravityButton = true;
@@ -91,8 +90,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     //Armor Stand Specific Settings
     double coarseRot;
     double fineRot;
-    boolean glowItemFrames = false;
-    boolean invisibleItemFrames = true;
     boolean armorStandVisibility = true;
     boolean defaultGravity = false;
 
@@ -283,14 +280,9 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         //Send Messages to Action Bar
         sendToActionBar = getConfig().getBoolean("sendMessagesToActionBar", true);
         showHelpButton = getConfig().getBoolean("showHelpButton", true);
-        showItemFrameVisibilityButton = getConfig().getBoolean("showItemFrameVisibilityButton", true);
         showArmorStandGlowButton = getConfig().getBoolean("showArmorStandGlowButton", true);
         showAxisButtons = getConfig().getBoolean("showAxisButtons", true);
         showGravityButton = getConfig().getBoolean("showGravityButton", true);
-
-        //All ItemFrame Stuff
-        glowItemFrames = getConfig().getBoolean("glowingItemFrame", true);
-        invisibleItemFrames = getConfig().getBoolean("invisibleItemFrames", true);
 
         debugFlag = getConfig().getBoolean("debugFlag", false);
         if (debugFlag) {
@@ -416,10 +408,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         return getConfig().getBoolean("armorStandVisibility");
     }
 
-    public boolean getItemFrameVisibility() {
-        return getConfig().getBoolean("invisibleItemFrames");
-    }
-
     public Language getLang() {
         return lang;
     }
@@ -430,10 +418,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
 
     public boolean getShowHelpButton() {
         return showHelpButton;
-    }
-
-    public boolean getShowItemFrameVisibilityButton() {
-        return showItemFrameVisibilityButton;
     }
 
     public boolean getShowArmorStandGlowButton() {
@@ -625,14 +609,9 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         //Send Messages to Action Bar
         sendToActionBar = getConfig().getBoolean("sendMessagesToActionBar", true);
         showHelpButton = getConfig().getBoolean("showHelpButton", true);
-        showItemFrameVisibilityButton = getConfig().getBoolean("showItemFrameVisibilityButton", true);
         showArmorStandGlowButton = getConfig().getBoolean("showArmorStandGlowButton", true);
         showAxisButtons = getConfig().getBoolean("showAxisButtons", true);
         showGravityButton = getConfig().getBoolean("showGravityButton", true);
-
-        //All ItemFrame Stuff
-        glowItemFrames = getConfig().getBoolean("glowingItemFrame", true);
-        invisibleItemFrames = getConfig().getBoolean("invisibleItemFrames", true);
 
         // Add Debug Reload
         debugFlag = getConfig().getBoolean("debugFlag", false);
@@ -702,9 +681,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
 
         //ArmorStandInvis Config
         metrics.addCustomChart(new SimplePie("armor_stand_invisibility_usage", () -> getConfig().getString("armorStandVisibility")));
-
-        //ArmorStandInvis Config
-        metrics.addCustomChart(new SimplePie("itemframe_invisibility_used", () -> getConfig().getString("invisibleItemFrames")));
 
         //Add tracking to see who is using Custom Naming in BStats
         metrics.addCustomChart(new SimplePie("custom_toolname_enabled", () -> getConfig().getString("requireToolName")));
