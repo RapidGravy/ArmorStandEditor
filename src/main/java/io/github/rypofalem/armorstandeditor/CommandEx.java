@@ -25,7 +25,6 @@ import io.github.rypofalem.armorstandeditor.modes.EditMode;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.*;
@@ -35,7 +34,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,7 +50,6 @@ public class CommandEx implements CommandExecutor, TabCompleter {
     final String VERSION = ChatColor.YELLOW + "/ase version";
     final String RELOAD = ChatColor.YELLOW + "/ase reload";
     final String GIVECUSTOMMODEL = ChatColor.YELLOW + "/ase give";
-    final String GIVEPLAYERHEAD = ChatColor.YELLOW + "/ase playerhead";
     final String GETARMORSTATS = ChatColor.YELLOW + "/ase stats";
     private Debug debug;
 
@@ -102,7 +99,6 @@ public class CommandEx implements CommandExecutor, TabCompleter {
                 player.sendMessage(HELP);
                 player.sendMessage(RELOAD);
                 player.sendMessage(GIVECUSTOMMODEL);
-                player.sendMessage(GIVEPLAYERHEAD);
                 player.sendMessage(GETARMORSTATS);
                 return true;
             }
@@ -114,7 +110,6 @@ public class CommandEx implements CommandExecutor, TabCompleter {
                 case "help", "?" -> commandHelp(player);
                 case "version" -> commandVersion(player);
                 case "give" -> commandGive(player);
-                case "playerhead" -> commandGivePlayerHead(player);
                 case "reload" -> commandReload(player);
                 case "stats" -> commandStats(player);
                 default -> {
@@ -126,7 +121,6 @@ public class CommandEx implements CommandExecutor, TabCompleter {
                     sender.sendMessage(HELP);
                     sender.sendMessage(RELOAD);
                     sender.sendMessage(GIVECUSTOMMODEL);
-                    sender.sendMessage(GIVEPLAYERHEAD);
                     sender.sendMessage(GETARMORSTATS);
                 }
             }
@@ -149,21 +143,6 @@ public class CommandEx implements CommandExecutor, TabCompleter {
             player.sendMessage(plugin.getLang().getMessage("give", "info"));
         } else {
             player.sendMessage(plugin.getLang().getMessage("nogive", "warn"));
-        }
-    }
-
-    private void commandGivePlayerHead(Player player) {
-        if (player.hasPermission("asedit.head")) {
-            debug.log("Creating a player head for the OfflinePlayer '" + player.getDisplayName() + "'");
-            OfflinePlayer offlinePlayer = player.getPlayer();
-            ItemStack item = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
-            SkullMeta meta = (SkullMeta) item.getItemMeta();
-            meta.setOwningPlayer(offlinePlayer);
-            item.setItemMeta(meta);
-            player.getInventory().addItem(item);
-            player.sendMessage(plugin.getLang().getMessage("playerhead", "info"));
-        } else {
-            player.sendMessage(plugin.getLang().getMessage("playerheaderror", "warn"));
         }
     }
 
@@ -466,10 +445,6 @@ public class CommandEx implements CommandExecutor, TabCompleter {
         return checkPermission(player, "reload", false);
     }
 
-    private boolean getPermissionPlayerHead(Player player) {
-        return checkPermission(player, "head", false);
-    }
-
     private boolean getPermissionStats(Player player) {
         return checkPermission(player, "stats", false);
     }
@@ -497,10 +472,6 @@ public class CommandEx implements CommandExecutor, TabCompleter {
                 if (getPermissionReload(player)) {
                     argList.add("reload");
                 }
-                if (getPermissionPlayerHead(player) || plugin.getallowedToRetrieveOwnPlayerHead()) {
-                    argList.add("playerhead");
-                }
-
                 if (getPermissionStats(player)) {
                     argList.add("stats");
                 }

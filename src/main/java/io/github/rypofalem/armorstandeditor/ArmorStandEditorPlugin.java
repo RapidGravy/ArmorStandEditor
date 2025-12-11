@@ -96,9 +96,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     boolean defaultGravity = false;
 
     //Misc Options
-    boolean allowedToRetrieveOwnPlayerHead = false;
-    boolean adminOnlyNotifications = false;
-
     //Glow Entity Colors
     public Scoreboard scoreboard;
     public Team team;
@@ -293,11 +290,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         glowItemFrames = getConfig().getBoolean("glowingItemFrame", true);
         invisibleItemFrames = getConfig().getBoolean("invisibleItemFrames", true);
 
-        //Ability to get Player Heads via a command
-        allowedToRetrieveOwnPlayerHead = getConfig().getBoolean("allowedToRetrieveOwnPlayerHead", true);
-
-        adminOnlyNotifications = getConfig().getBoolean("adminOnlyNotifications", true);
-
         debugFlag = getConfig().getBoolean("debugFlag", false);
         if (debugFlag) {
             getServer().getLogger().log(Level.INFO, "[ArmorStandEditor-Debug] ArmorStandEditor Debug Mode is now ENABLED! Use this ONLY for testing Purposes. If you can see this and you have debug disabled, please report it as a bug!");
@@ -463,14 +455,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     }
 
     //New in 1.20-43: Allow the ability to get a player head from a command - ENABLED VIA CONFIG ONLY!
-    public boolean getallowedToRetrieveOwnPlayerHead() {
-        return this.getConfig().getBoolean("allowedToRetrieveOwnPlayerHead");
-    }
-
-    public boolean getAdminOnlyNotifications() {
-        return this.getConfig().getBoolean("adminOnlyNotifications");
-    }
-
 
     public double getMinScaleValue() {
         return this.getConfig().getDouble("minScaleValue");
@@ -643,11 +627,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         glowItemFrames = getConfig().getBoolean("glowingItemFrame", true);
         invisibleItemFrames = getConfig().getBoolean("invisibleItemFrames", true);
 
-        //Ability to get Player Heads via a command
-        allowedToRetrieveOwnPlayerHead = getConfig().getBoolean("allowedToRetrieveOwnPlayerHead", true);
-        adminOnlyNotifications = getConfig().getBoolean("adminOnlyNotifications", true);
-
-        //Add Ability to check for UpdatePerms that Notify Ops - https://github.com/Wolfieheart/ArmorStandEditor/issues/86
         // Add Debug Reload
         debugFlag = getConfig().getBoolean("debugFlag", false);
         if (debugFlag) {
