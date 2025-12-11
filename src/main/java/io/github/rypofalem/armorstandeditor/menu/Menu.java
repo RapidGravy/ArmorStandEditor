@@ -192,7 +192,7 @@ public class Menu {
             disableSlots = blankSlot;
         }
 
-        if (pe.getPlayer().hasPermission("asedit.togglegravity")) {
+        if (pe.plugin.getShowGravityButton() && pe.getPlayer().hasPermission("asedit.togglegravity")) {
             gravity = createIcon(new ItemStack(Material.SAND), "gravity", "mode gravity");
         } else {
             gravity = blankSlot;

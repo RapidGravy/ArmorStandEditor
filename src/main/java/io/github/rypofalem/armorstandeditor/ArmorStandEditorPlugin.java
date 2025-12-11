@@ -86,6 +86,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     boolean showItemFrameVisibilityButton = true;
     boolean showArmorStandGlowButton = true;
     boolean showAxisButtons = true;
+    boolean showGravityButton = true;
 
     //Armor Stand Specific Settings
     double coarseRot;
@@ -285,6 +286,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         showItemFrameVisibilityButton = getConfig().getBoolean("showItemFrameVisibilityButton", true);
         showArmorStandGlowButton = getConfig().getBoolean("showArmorStandGlowButton", true);
         showAxisButtons = getConfig().getBoolean("showAxisButtons", true);
+        showGravityButton = getConfig().getBoolean("showGravityButton", true);
 
         //All ItemFrame Stuff
         glowItemFrames = getConfig().getBoolean("glowingItemFrame", true);
@@ -440,6 +442,10 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
 
     public boolean getShowAxisButtons() {
         return showAxisButtons;
+    }
+
+    public boolean getShowGravityButton() {
+        return showGravityButton;
     }
 
     public Material getEditTool() {
@@ -622,6 +628,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         showItemFrameVisibilityButton = getConfig().getBoolean("showItemFrameVisibilityButton", true);
         showArmorStandGlowButton = getConfig().getBoolean("showArmorStandGlowButton", true);
         showAxisButtons = getConfig().getBoolean("showAxisButtons", true);
+        showGravityButton = getConfig().getBoolean("showGravityButton", true);
 
         //All ItemFrame Stuff
         glowItemFrames = getConfig().getBoolean("glowingItemFrame", true);

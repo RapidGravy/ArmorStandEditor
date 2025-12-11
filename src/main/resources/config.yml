@@ -88,6 +88,8 @@ showItemFrameVisibilityButton: true
 showArmorStandGlowButton: true
 #Show or hide the X/Y/Z axis selector buttons inside the GUI
 showAxisButtons: true
+#Show or hide the Gravity toggle inside the GUI
+showGravityButton: true
 
 #------ Misc Options
 
