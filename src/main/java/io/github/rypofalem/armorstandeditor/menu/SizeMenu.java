@@ -293,7 +293,7 @@ public class SizeMenu extends ASEHolder {
         return prefix + formatScaleValue(step) + " (" + modifier + ")";
     }
 
-    private ItemStack getDisplayName(ItemStack item) {
+    private String getDisplayName(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         return meta != null ? meta.getDisplayName() : "";
     }
