@@ -149,13 +149,7 @@ public class Menu {
         //Praise Start - Sikatsu and cowgod, Nicely spotted this being broken
         if (pe.getPlayer().hasPermission("asedit.togglearmorstandvisibility") ||
             pe.plugin.getArmorStandVisibility()) {
-            visibility = new ItemStack(Material.POTION, 1);
-            PotionMeta potionMeta = (PotionMeta) visibility.getItemMeta();
-            PotionEffect effect = new PotionEffect(PotionEffectType.INVISIBILITY, 1, 0);
-            if (potionMeta != null) {
-                potionMeta.addCustomEffect(effect, true);
-            }
-            visibility.setItemMeta(potionMeta);
+            visibility = new ItemStack(Material.GLASS_BOTTLE, 1);
             createIcon(visibility, "invisible", "mode invisible");
         } else {
             visibility = blankSlot;
