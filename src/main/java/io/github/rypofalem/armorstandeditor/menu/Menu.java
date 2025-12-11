@@ -88,8 +88,13 @@ public class Menu {
         ItemStack toggleVulnerabilty = null;
 
         //Slots with No Value
-        blankSlot = createIcon(new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1),
-            "blankslot", "");
+        blankSlot = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1);
+        ItemMeta blankMeta = blankSlot.getItemMeta();
+        if (blankMeta != null) {
+            blankMeta.setDisplayName("");
+            blankMeta.setLore(null);
+            blankSlot.setItemMeta(blankMeta);
+        }
 
         //Axis - X, Y, Z for Movement
         if (pe.plugin.getShowAxisButtons()) {
