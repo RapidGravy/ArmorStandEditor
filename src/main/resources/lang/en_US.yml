@@ -36,7 +36,7 @@ setmode:
   rotate: Rotate
   copy: Copy
   paste: Paste
-  reset: Reset Size
+  reset: Reset Pose
   itemframe: Toggle Itemframe Visibility
   playerhead: Get a Players Head
 setaxis:
@@ -269,9 +269,9 @@ copyslot:
   description:
     msg: Select a slot to store settings
 reset:
-  msg: Reset Size
+  msg: Reset Pose
   description:
-    msg: Reset bodypart position to default
+    msg: Reset the ArmorStand pose to default
 helpgui:
   msg: Help!
   description:
@@ -377,6 +377,10 @@ sizeMenu:
   msg: ArmorStand Size (Scaling)
   description:
     msg: Set a scale for your ArmorStand [Will Open ANOTHER Menu]
+scalereset:
+  msg: Reset Size
+  description:
+    msg: Reset the ArmorStand size back to default.
 
 scalepreset:
   msg: Scale preset <x>

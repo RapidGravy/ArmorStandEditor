@@ -31,16 +31,12 @@ public class SizeMenu extends ASEHolder {
     static String name = "Size Menu";
 
     private final Map<String, Double> presetScaleOptions = new HashMap<>();
-    private final Map<String, Double> increaseScaleOptions = new HashMap<>();
-    private final Map<String, Double> decreaseScaleOptions = new HashMap<>();
 
     private static final int PRESET_COUNT = 6;
     private static final double MINIMUM_STEP = 0.01d;
-    private static final double COARSE_STEP_DIVISOR = 5d;
-    private static final double FINE_STEP_DIVISOR = 4d;
 
     private String backToMenuDisplayName = "";
-    private String resetDisplayName = "";
+    private String sizeResetDisplayName = "";
 
     public SizeMenu(PlayerEditor pe, ArmorStand as) {
         this.pe = pe;
@@ -53,14 +49,12 @@ public class SizeMenu extends ASEHolder {
     private void fillInventory() {
         menuInv.clear();
         presetScaleOptions.clear();
-        increaseScaleOptions.clear();
-        decreaseScaleOptions.clear();
 
         ItemStack blankSlot = createIcon(new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1), "blankslot");
         ItemStack backToMenu = createIcon(new ItemStack(Material.RED_WOOL, 1), "backtomenu");
-        ItemStack resetIcon = createIcon(new ItemStack(Material.NETHER_STAR, 1), "reset");
+        ItemStack resetIcon = createIcon(new ItemStack(Material.NETHER_STAR, 1), "scalereset");
         backToMenuDisplayName = getDisplayName(backToMenu);
-        resetDisplayName = getDisplayName(resetIcon);
+        sizeResetDisplayName = getDisplayName(resetIcon);
 
         double minScale = roundScaleValue(plugin.getMinScaleValue());
         double maxScale = roundScaleValue(plugin.getMaxScaleValue());
@@ -71,19 +65,11 @@ public class SizeMenu extends ASEHolder {
         double[] presetValues = generatePresetValues(minScale, maxScale);
         ItemStack[] presetIcons = buildPresetIcons(presetValues);
 
-        double coarseStep = calculateCoarseStep(minScale, maxScale);
-        double fineStep = calculateFineStep(coarseStep);
-
-        ItemStack increaseCoarse = createScaleIncreaseIcon(new ItemStack(Material.ORANGE_CONCRETE, 1), coarseStep, true);
-        ItemStack increaseFine = createScaleIncreaseIcon(new ItemStack(Material.ORANGE_CONCRETE, 1), fineStep, false);
-        ItemStack decreaseCoarse = createScaleDecreaseIcon(new ItemStack(Material.GREEN_CONCRETE, 1), coarseStep, true);
-        ItemStack decreaseFine = createScaleDecreaseIcon(new ItemStack(Material.GREEN_CONCRETE, 1), fineStep, false);
-
         ItemStack[] items = {
             backToMenu, blankSlot, getPresetIcon(presetIcons, 0, blankSlot), getPresetIcon(presetIcons, 1, blankSlot),
             getPresetIcon(presetIcons, 2, blankSlot), getPresetIcon(presetIcons, 3, blankSlot),
             getPresetIcon(presetIcons, 4, blankSlot), getPresetIcon(presetIcons, 5, blankSlot), blankSlot,
-            resetIcon, blankSlot, blankSlot, increaseCoarse, increaseFine, blankSlot, blankSlot, decreaseFine, decreaseCoarse,
+            resetIcon, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot,
             blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, blankSlot
         };
 
@@ -122,51 +108,20 @@ public class SizeMenu extends ASEHolder {
         return stack;
     }
 
-    private ItemStack createScaleIncreaseIcon(ItemStack icon, double step, boolean coarse) {
-        String formattedValue = formatAdjustmentValue(step, true, coarse);
-        ItemStack stack = createIcon(icon, "scaleincrease", formattedValue);
-        ItemMeta meta = stack.getItemMeta();
-        if (meta != null) {
-            increaseScaleOptions.put(meta.getDisplayName(), step);
-        }
-        return stack;
-    }
-
-    private ItemStack createScaleDecreaseIcon(ItemStack icon, double step, boolean coarse) {
-        String formattedValue = formatAdjustmentValue(step, false, coarse);
-        ItemStack stack = createIcon(icon, "scaledecrease", formattedValue);
-        ItemMeta meta = stack.getItemMeta();
-        if (meta != null) {
-            decreaseScaleOptions.put(meta.getDisplayName(), step);
-        }
-        return stack;
-    }
-
     public void handleAttributeScaling(String itemName, Player player) {
         if (itemName == null || player == null) return;
 
         if (presetScaleOptions.containsKey(itemName)) {
             handleAbsoluteScaleChange(player, presetScaleOptions.get(itemName));
-        } else if (increaseScaleOptions.containsKey(itemName)) {
-            handleRelativeScaleChange(player, increaseScaleOptions.get(itemName));
-        } else if (decreaseScaleOptions.containsKey(itemName)) {
-            handleRelativeScaleChange(player, -decreaseScaleOptions.get(itemName));
         } else if (itemName.equals(backToMenuDisplayName)) {
             handleBackToMenu(player);
-        } else if (itemName.equals(resetDisplayName)) {
+        } else if (itemName.equals(sizeResetDisplayName)) {
             handleReset(player);
         }
     }
 
     private void handleAbsoluteScaleChange(Player player, double absoluteValue) {
         if (applyScale(player, absoluteValue, true)) {
-            playChimeSound(player);
-            player.closeInventory();
-        }
-    }
-
-    private void handleRelativeScaleChange(Player player, double delta) {
-        if (applyScale(player, delta, false)) {
             playChimeSound(player);
             player.closeInventory();
         }
@@ -269,28 +224,12 @@ public class SizeMenu extends ASEHolder {
         return values;
     }
 
-    private double calculateCoarseStep(double minScale, double maxScale) {
-        double range = Math.max(maxScale - minScale, MINIMUM_STEP);
-        double step = range / COARSE_STEP_DIVISOR;
-        return roundScaleValue(Math.max(step, MINIMUM_STEP));
-    }
-
-    private double calculateFineStep(double coarseStep) {
-        return roundScaleValue(Math.max(coarseStep / FINE_STEP_DIVISOR, MINIMUM_STEP));
-    }
-
     private double roundScaleValue(double value) {
         return Math.round(value * 100.0d) / 100.0d;
     }
 
     private String formatScaleValue(double value) {
         return String.format(Locale.US, "%.2f", value);
-    }
-
-    private String formatAdjustmentValue(double step, boolean increase, boolean coarse) {
-        String prefix = increase ? "+" : "-";
-        String modifier = coarse ? "Coarse" : "Fine";
-        return prefix + formatScaleValue(step) + " (" + modifier + ")";
     }
 
     private String getDisplayName(ItemStack item) {
