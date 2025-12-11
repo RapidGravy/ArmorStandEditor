@@ -84,6 +84,8 @@ sendMessagesToActionBar: true
 showHelpButton: true
 #Show or hide the Item Frame visibility toggle inside the GUI (permission still required if shown)
 showItemFrameVisibilityButton: true
+#Show or hide the Armor Stand glow toggle inside the GUI
+showArmorStandGlowButton: true
 
 #------ Misc Options
 

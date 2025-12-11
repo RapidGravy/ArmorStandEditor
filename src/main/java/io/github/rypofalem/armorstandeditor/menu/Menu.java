@@ -250,7 +250,8 @@ public class Menu {
             playerHead = blankSlot;
         }
 
-        if (pe.getPlayer().hasPermission("asedit.togglearmorstandglow")) {
+        if (pe.plugin.getShowArmorStandGlowButton() &&
+            pe.getPlayer().hasPermission("asedit.togglearmorstandglow")) {
             glowing = createIcon(new ItemStack(Material.GLOW_INK_SAC, 1),
                 "armorstandglow",
                 "mode armorstandglow");
